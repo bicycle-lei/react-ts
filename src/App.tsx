@@ -3,11 +3,11 @@
  * @Author: wangdelei
  * @Date: 2021-07-07 13:59:31
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-07 16:05:40
+ * @LastEditTime: 2021-07-07 16:20:18
  */
 import logo from './logo.svg';
-// import './App.less';
 import styles from './App.module.less';
+import { Button } from 'antd';
 
 function App() {
   return (
@@ -17,14 +17,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className={styles.AppLink}
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Button type="primary">测试按钮</Button>  
       </header>
     </div>
   );
