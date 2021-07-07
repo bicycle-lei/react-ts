@@ -3,13 +3,13 @@
  * @Author: wangdelei
  * @Date: 2021-07-07 13:59:31
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-07 16:20:18
+ * @LastEditTime: 2021-07-07 16:43:42
  */
 import logo from './logo.svg';
 import styles from './App.module.less';
 import { Button } from 'antd';
 
-function App() {
+function App () {
   return (
     <div className={styles.App}>
       <header className={styles.AppHeader}>
