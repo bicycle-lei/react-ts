@@ -3,7 +3,7 @@
  * @Author: wangdelei
  * @Date: 2021-07-07 14:02:54
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-07 16:14:06
+ * @LastEditTime: 2021-07-07 16:54:47
  */
 /// <reference types="node" />
 /// <reference types="react" />
@@ -79,4 +79,7 @@ declare module '*.module.sass' {
 declare module '*.module.less' {
     const classes: { readonly [key: string]: string };
     export default classes;
-  }
+}
+
+declare module 'react-router-dom';
+
