@@ -3,11 +3,11 @@
  * @Author: wangdelei
  * @Date: 2021-07-07 13:59:31
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-07 15:35:59
+ * @LastEditTime: 2021-07-07 16:05:40
  */
 import logo from './logo.svg';
-// import './App.css';
-import styles from './App.module.css';
+// import './App.less';
+import styles from './App.module.less';
 
 function App() {
   return (
