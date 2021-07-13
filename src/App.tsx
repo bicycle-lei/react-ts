@@ -3,29 +3,34 @@
  * @Author: wangdelei
  * @Date: 2021-07-07 13:59:31
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-13 11:29:49
+ * @LastEditTime: 2021-07-13 20:25:59
  */
-import styles from './App.module.less';
-// import { Button } from 'antd';
-import React from 'react';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-
+import routes from './routes';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 function App() {
     return (
-        <div className={styles.App}>
-            <BrowserRouter>
-                <div>我是最外层</div>
-                <Switch>
-                    <Route exact path="/">
-                        我是首页
-                    </Route>
-                    <Route path="/about">
-                        <Link to="/">我是关于</Link>
-                    </Route>
-                    <Route path="/dashboard">我是黑板</Route>
-                </Switch>
-            </BrowserRouter>
-        </div>
+        <BrowserRouter>
+            <Switch>
+                {routes.map((item) => {
+                    const { path, childRoutes } = item;
+                    return childRoutes.length ? (
+                        <Route
+                            path={path}
+                            key={path}
+                            render={() => (
+                                <item.component>
+                                    {childRoutes.map((route, i) => {
+                                        return <Route {...route} key={i} />;
+                                    })}
+                                </item.component>
+                            )}
+                        />
+                    ) : (
+                        <Route {...item} key={path} />
+                    );
+                })}
+            </Switch>
+        </BrowserRouter>
     );
 }
 
