@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: wangdelei
+ * @Date: 2021-07-07 15:38:19
+ * @LastEditors: wangdelei
+ * @LastEditTime: 2021-07-13 11:05:03
+ */
 'use strict';
 
 const path = require('path');
@@ -21,7 +28,7 @@ const publicUrlOrPath = getPublicUrlOrPath(
   process.env.PUBLIC_URL
 );
 
-const buildPath = process.env.BUILD_PATH || 'build';
+const buildPath = process.env.BUILD_PATH || 'dist';
 
 const moduleFileExtensions = [
   'web.mjs',
