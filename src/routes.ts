@@ -3,7 +3,7 @@
  * @Author: wangdelei
  * @Date: 2021-07-13 14:53:45
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-13 20:25:21
+ * @LastEditTime: 2021-07-14 14:51:05
  */
 import Layout from './page/layout';
 import Home from './page/home';
@@ -30,7 +30,7 @@ const routers = [
             },
             {
                 name: '主要',
-                path: '/home/index',
+                path: '/home/:id',
                 component: About,
             },
             {   

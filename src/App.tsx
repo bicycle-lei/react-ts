@@ -3,9 +3,10 @@
  * @Author: wangdelei
  * @Date: 2021-07-07 13:59:31
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-13 20:25:59
+ * @LastEditTime: 2021-07-14 15:05:30
  */
 import routes from './routes';
+// Link
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     const { path, childRoutes } = item;
                     return childRoutes.length ? (
                         <Route
+                            // exact
                             path={path}
                             key={path}
                             render={() => (
