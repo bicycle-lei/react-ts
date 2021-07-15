@@ -3,21 +3,28 @@
  * @Author: wangdelei
  * @Date: 2021-07-13 14:43:20
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-15 10:14:47
+ * @LastEditTime: 2021-07-15 14:33:17
  */
 import { useEffect } from 'react';
-import { getApI } from '../../utils/request';
+import { getlist, setList, getDetail } from '../../services/api';
 interface HomeProps {
     history: any;
 }
 const Home: React.FC<HomeProps> = ({ history }) => {
-    useEffect(() => {
-        getApI('/gtm/api/report/synthesizeExamResult?bmid=29732');
+    const getData = async () => {
+        const res =await getlist();
+        const res1 =await getDetail();
+    }
+    useEffect( () => {
+        getData();
     }, [])
     return (
         <div
             onClick={() => {
-                history.push({ pathname: '/about' });
+                setList({name: "ceshi",
+                parentId: 23,
+                postType: "group"})
+                // history.push({ pathname: '/about' });
             }}
         >
             我是首页
