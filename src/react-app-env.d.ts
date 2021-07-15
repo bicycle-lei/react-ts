@@ -3,7 +3,7 @@
  * @Author: wangdelei
  * @Date: 2021-07-07 14:02:54
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-07 16:54:47
+ * @LastEditTime: 2021-07-15 09:44:53
  */
 /// <reference types="node" />
 /// <reference types="react" />
@@ -82,4 +82,4 @@ declare module '*.module.less' {
 }
 
 declare module 'react-router-dom';
-
+declare module 'qs';
