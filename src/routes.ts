@@ -3,12 +3,12 @@
  * @Author: wangdelei
  * @Date: 2021-07-13 14:53:45
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-14 15:31:38
+ * @LastEditTime: 2021-07-16 09:52:54
  */
-import Layout from './page/layout';
-import Home from './page/home';
-import About from './page/about';
-import Login from './page/login';
+import Layout from '@/pages/layout';
+import Home from '@/pages/home';
+import About from '@/pages/about';
+import Login from '@/pages/login';
 const routers = [
     {   
         name: '登录',

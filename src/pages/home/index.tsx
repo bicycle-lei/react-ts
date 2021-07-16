@@ -3,10 +3,10 @@
  * @Author: wangdelei
  * @Date: 2021-07-13 14:43:20
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-15 14:33:17
+ * @LastEditTime: 2021-07-16 09:25:21
  */
 import { useEffect } from 'react';
-import { getlist, setList, getDetail } from '../../services/api';
+import { getlist, setList, getDetail } from '@/services/api';
 interface HomeProps {
     history: any;
 }
