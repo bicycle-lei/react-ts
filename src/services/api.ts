@@ -3,12 +3,12 @@
  * @Author: wangdelei
  * @Date: 2021-07-15 14:16:05
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-16 09:31:37
+ * @LastEditTime: 2021-07-16 11:12:46
  */
 import { instanceGet, instancePost } from '@/utils/request';
 
 export const getlist = () => {
-    return instanceGet('/gtm/api/report/synthesizeExamResult?bmid=29732',{},{
+    return instanceGet('/muser/userInfo/getAgencyUserList?id=7478',{},{
         
     });
 };

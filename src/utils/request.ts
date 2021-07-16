@@ -3,14 +3,33 @@
  * @Author: wangdelei
  * @Date: 2021-07-15 09:32:20
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-15 15:54:01
+ * @LastEditTime: 2021-07-16 11:04:39
  */
 import axios from 'axios';
 
-const baseURL =
-    process.env.NODE_ENV === 'development'
-        ? '/dev'
-        : 'https://t-mgateway.gaodunwangxiao.com';
+const NODE_ENV = process.env.NODE_ENV;
+var baseURL = '';
+/**
+ * @description: 开发环境下设置代理请求环境
+ * @param {*}
+ * @return {*}
+ */
+const developmentServerEnv = () => {
+    const serverEnv = process.env.REACT_APP_SECRET_SERVICE_ENV; //自定义环境变量 对应本地代理 默认值test
+    serverEnv === 'test' ? (baseURL = '/dev') : (baseURL = '/prod');
+};
+switch (NODE_ENV) {
+    case 'development': // 开发环境
+        developmentServerEnv();
+        break;
+    case 'test': // 测试环境
+        baseURL = 'https://t-mgateway.gaodunwangxiao.com';
+        break;
+    case 'production': // 正式环境
+        baseURL = 'https://mgateway.gaodunwangxiao.com';
+        break;
+}
+
 const instance = axios.create({
     baseURL,
     timeout: 1000,
@@ -32,8 +51,9 @@ instance.interceptors.request.use(
 // 添加响应拦截器
 instance.interceptors.response.use(
     (res) => {
-        const token = 'Bearer eyJhZ2VuY3kiOjI4OCwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJHYW9kdW4iLCJpYXQiOjE2MjM3NDcyMDMsInN1YiI6Ijg3MjAxNyIsImlzcyI6Ikdhb2R1biIsImV4cCI6MTYyNjMzOTIwM30.Us1upSPR4y3EWwvA6qffGVq4EHk-4qdnxaUY0JQtmoQ'
-        localStorage.setItem('Token', token)
+        const token =
+            'Bearer eyJhZ2VuY3kiOjI4OCwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJHYW9kdW4iLCJpYXQiOjE2MjM3NDcyMDMsInN1YiI6Ijg3MjAxNyIsImlzcyI6Ikdhb2R1biIsImV4cCI6MTYyNjMzOTIwM30.Us1upSPR4y3EWwvA6qffGVq4EHk-4qdnxaUY0JQtmoQ';
+        localStorage.setItem('Token', token);
         return res.data;
     },
     (error) => {
