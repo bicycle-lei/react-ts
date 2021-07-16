@@ -3,7 +3,7 @@
  * @Author: wangdelei
  * @Date: 2021-07-15 09:32:20
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-16 11:04:39
+ * @LastEditTime: 2021-07-16 11:35:54
  */
 import axios from 'axios';
 
@@ -14,13 +14,13 @@ var baseURL = '';
  * @param {*}
  * @return {*}
  */
-const developmentServerEnv = () => {
+const devServerEnv = () => {
     const serverEnv = process.env.REACT_APP_SECRET_SERVICE_ENV; //自定义环境变量 对应本地代理 默认值test
     serverEnv === 'test' ? (baseURL = '/dev') : (baseURL = '/prod');
 };
 switch (NODE_ENV) {
     case 'development': // 开发环境
-        developmentServerEnv();
+        devServerEnv();
         break;
     case 'test': // 测试环境
         baseURL = 'https://t-mgateway.gaodunwangxiao.com';
@@ -32,7 +32,7 @@ switch (NODE_ENV) {
 
 const instance = axios.create({
     baseURL,
-    timeout: 1000,
+    timeout: 10000,
     headers: {
         Authorization: '',
     },
