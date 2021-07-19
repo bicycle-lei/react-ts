@@ -3,7 +3,7 @@
  * @Author: wangdelei
  * @Date: 2021-07-13 14:58:17
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-14 19:15:04
+ * @LastEditTime: 2021-07-19 13:43:48
  */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -19,7 +19,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
         (item) => item.name
     );
     const { pathname } = window.location;
-    var defaultKey: string = '';
+    var defaultKey: string = '1';
     navList.some((item, index) => {
         if (pathname === item.path) {
             defaultKey = String(index + 1);
@@ -50,7 +50,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
                         {props.children}
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>
+                <Footer className={styles.layoutFooter}>
                     Ant Design ©2018 Created by Ant UED
                 </Footer>
             </Lay>
