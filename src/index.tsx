@@ -3,17 +3,20 @@
  * @Author: wangdelei
  * @Date: 2021-07-07 13:59:31
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-07 16:44:14
+ * @LastEditTime: 2021-07-20 11:23:32
  */
 import React from 'react';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import './index.less';
 import App from './App';
+import {store} from './stores';
 import reportWebVitals from './reportWebVitals';
-
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <Provider store = {store}>
+          <App />
+      </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
