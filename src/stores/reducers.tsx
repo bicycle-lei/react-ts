@@ -3,53 +3,47 @@
  * @Author: wangdelei
  * @Date: 2021-07-20 10:40:13
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-20 10:56:28
+ * @LastEditTime: 2021-07-22 20:19:06
  */
 import { combineReducers } from 'redux';
-import {
-    ADD_TODO,
-    TOGGLE_TODO,
-    SET_VISIBILITY_FILTER,
-    VisibilityFilters,
-} from './actions';
-const { SHOW_ALL } = VisibilityFilters;
 
-function visibilityFilter(state = SHOW_ALL, action: any) {
+import { ADD_COUNT, MINUS_COUNT, DATA_LIST } from './actionTypes';
+/**
+ * @description: 存储count到store
+ * @param {*} state store对象中的count
+ * @param {any} action action
+ * @return {*} 返回新的 count
+ */
+function count(state = 0, action: any) {
+    const newCount = action.count || 0;
     switch (action.type) {
-        case SET_VISIBILITY_FILTER:
-            return action.filter;
+        case ADD_COUNT:
+            return state + newCount;
+        case MINUS_COUNT:
+            return state - newCount;
         default:
             return state;
     }
 }
-
-function todos(state = [], action: any) {
+/**
+ * @description: 存储list到store
+ * @param {*} state
+ * @param {any} action
+ * @return {*} 返回新的list
+ */
+function list(state = [], action: any) {
+    const newList = action.list || [];
     switch (action.type) {
-        case ADD_TODO:
-            return [
-                ...state,
-                {
-                    text: action.text,
-                    completed: false,
-                },
-            ];
-        case TOGGLE_TODO:
-            return state.map((todo: any, index) => {
-                if (index === action.index) {
-                    return Object.assign({}, todo, {
-                        completed: !todo.completed,
-                    });
-                }
-                return todo;
-            });
+        case DATA_LIST:
+            return [...state, ...newList];
         default:
             return state;
     }
 }
-
-const todoApp = combineReducers({
-    visibilityFilter,
-    todos,
+// 可以将多个redux合并为一个导出
+const storeInit = combineReducers({
+    count,
+    list,
 });
 
-export default todoApp;
+export default storeInit;

@@ -3,16 +3,15 @@
  * @Author: wangdelei
  * @Date: 2021-07-13 14:47:58
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-20 14:37:59
+ * @LastEditTime: 2021-07-22 20:47:57
  */
-import { Link } from 'react-router-dom';
-// import { useParams } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+// import { useParams } from 'react-router-dom'; // 获取路由参数
 function About() {
     // const { id } = useParams();
     return (
         <div>
-            关于页内容
-            <Link to="/home"></Link>
+            关于页
         </div>
     );
 }

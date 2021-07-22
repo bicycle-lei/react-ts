@@ -3,39 +3,34 @@
  * @Author: wangdelei
  * @Date: 2021-07-20 09:52:28
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-20 11:02:53
+ * @LastEditTime: 2021-07-22 20:47:26
  */
 // import types from './actionTypes';
 /*
  * action 类型
  */
-
-export const ADD_TODO = 'ADD_TODO';
-export const TOGGLE_TODO = 'TOGGLE_TODO';
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
-
-/*
- * 其它的常量
- */
-
-export const VisibilityFilters = {
-    SHOW_ALL: 'SHOW_ALL',
-    SHOW_COMPLETED: 'SHOW_COMPLETED',
-    SHOW_ACTIVE: 'SHOW_ACTIVE',
-};
-
+import { MINUS_COUNT, ADD_COUNT, DATA_LIST } from './actionTypes';
+import { getlist } from '@/services/api';
 /*
  * action 创建函数
  */
 
-export function addTodo(text: any) {
-    return { type: ADD_TODO, text };
+export function addCount(count: number) {
+    return { type: ADD_COUNT, count };
 }
 
-export function toggleTodo(index: any) {
-    return { type: TOGGLE_TODO, index };
+export function minusCount(count: number) {
+    return { type: MINUS_COUNT, count };
 }
 
-export function setVisibilityFilter(filter: any) {
-    return { type: SET_VISIBILITY_FILTER, filter };
+export function dataList(list: any) {
+    return { type: DATA_LIST, list };
+}
+
+export function getDataList() {
+    return function (dispatch:any) {
+        getlist().then((res:any) => {
+            dispatch(dataList(res.result));
+        });
+    }
 }
