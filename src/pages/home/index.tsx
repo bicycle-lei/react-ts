@@ -3,9 +3,9 @@
  * @Author: wangdelei
  * @Date: 2021-07-13 14:43:20
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-22 20:47:41
+ * @LastEditTime: 2021-07-23 11:07:56
  */
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
@@ -19,6 +19,8 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = (props) => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const toAbout =  () => {
         props.history.push('/about')
     }
@@ -32,9 +34,12 @@ const Home: React.FC<HomeProps> = (props) => {
         props.dispatch(minusCount(count))
     }
     const getList = () => {
+        setIsLoading(true);
         store.dispatch(getDataList())
     }
-    useEffect(() => {}, []);
+    useEffect(() => {
+        setIsLoading(false);
+    }, [props.state.list]);
     return (
         <div>
             <div>
@@ -49,7 +54,7 @@ const Home: React.FC<HomeProps> = (props) => {
                     <Button type="primary" onClick={addCount} style={{marginRight: '20px'}}>conut++</Button>
                     <Button type="primary" onClick={() => {minuCount(1)}}>count--</Button>
                 </div>
-                <div> <Button type="primary" onClick={() => {getList()}} style={{margin: '20px'}}>异步获取数据</Button> </div>
+                <div> <Button type="primary" onClick={() => {getList()}} style={{margin: '20px'}} loading={isLoading}>异步获取数据</Button> </div>
                 <div>
                     {props.state.list.map((item:any, index:number) => {
                         return <div key={index}>{item.name}</div>
