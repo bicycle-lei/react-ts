@@ -3,7 +3,7 @@
  * @Author: wangdelei
  * @Date: 2021-07-13 14:43:20
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-23 11:07:56
+ * @LastEditTime: 2021-07-23 11:15:26
  */
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { minusCount, getDataList } from '@/stores/actions';
 import { store } from '@/stores/index';
+import styles from './index.module.less'
 interface HomeProps {
     history: any;
     dispatch: any;
@@ -43,21 +44,21 @@ const Home: React.FC<HomeProps> = (props) => {
     return (
         <div>
             <div>
-                <Link to="/about" style={{marginRight: '20px'}}>
+                <Link to="/about" className={styles.marginLayout}>
                     <Button type="primary">Link标签跳转</Button>
                 </Link>
                 <Button type="primary" onClick={toAbout} >click 点击跳转</Button>
-                <div style={{margin: '20px'}}>
+                <div className={styles.marginLayout}>
                     我是redux存储的count：{props.state.count}
                 </div>
                 <div>
-                    <Button type="primary" onClick={addCount} style={{marginRight: '20px'}}>conut++</Button>
-                    <Button type="primary" onClick={() => {minuCount(1)}}>count--</Button>
+                    <Button type="primary" onClick={addCount} className={styles.marginLayout}>conut++</Button>
+                    <Button type="primary" onClick={() => {minuCount(1)}} className={styles.marginLayout}>count--</Button>
                 </div>
-                <div> <Button type="primary" onClick={() => {getList()}} style={{margin: '20px'}} loading={isLoading}>异步获取数据</Button> </div>
+                <div> <Button type="primary" onClick={() => {getList()}} className={styles.marginLayout} loading={isLoading}>异步获取数据</Button> </div>
                 <div>
                     {props.state.list.map((item:any, index:number) => {
-                        return <div key={index}>{item.name}</div>
+                        return <div key={index} className={styles.marginLayout}>{item.name}</div>
                     })}
                 </div>
             </div>
