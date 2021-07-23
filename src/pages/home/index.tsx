@@ -3,14 +3,15 @@
  * @Author: wangdelei
  * @Date: 2021-07-13 14:43:20
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-23 11:15:26
+ * @LastEditTime: 2021-07-23 14:05:57
  */
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import { minusCount, getDataList } from '@/stores/actions';
+import { minusCount } from '@/stores/actions';
 import { store } from '@/stores/index';
+import {dataList } from '@/stores/actions'
 import styles from './index.module.less'
 interface HomeProps {
     history: any;
@@ -21,7 +22,7 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = (props) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-
+    console.log(props.state.list)
     const toAbout =  () => {
         props.history.push('/about')
     }
@@ -36,7 +37,7 @@ const Home: React.FC<HomeProps> = (props) => {
     }
     const getList = () => {
         setIsLoading(true);
-        store.dispatch(getDataList())
+        // store.dispatch(getDataList())
     }
     useEffect(() => {
         setIsLoading(false);
@@ -55,7 +56,7 @@ const Home: React.FC<HomeProps> = (props) => {
                     <Button type="primary" onClick={addCount} className={styles.marginLayout}>conut++</Button>
                     <Button type="primary" onClick={() => {minuCount(1)}} className={styles.marginLayout}>count--</Button>
                 </div>
-                <div> <Button type="primary" onClick={() => {getList()}} className={styles.marginLayout} loading={isLoading}>异步获取数据</Button> </div>
+                <div> <Button type="primary" onClick={() => {props.dispatch(dataList([{name: 'jimmy'}]))}} className={styles.marginLayout} loading={isLoading}>异步获取数据</Button> </div>
                 <div>
                     {props.state.list.map((item:any, index:number) => {
                         return <div key={index} className={styles.marginLayout}>{item.name}</div>

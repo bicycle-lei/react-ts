@@ -3,7 +3,7 @@
  * @Author: wangdelei
  * @Date: 2021-07-20 10:40:13
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-22 20:19:06
+ * @LastEditTime: 2021-07-23 14:04:52
  */
 import { combineReducers } from 'redux';
 
@@ -32,10 +32,10 @@ function count(state = 0, action: any) {
  * @return {*} 返回新的list
  */
 function list(state = [], action: any) {
-    const newList = action.list || [];
+    // const newList = action.list || [];
     switch (action.type) {
         case DATA_LIST:
-            return [...state, ...newList];
+            return [...state, ...action.list];
         default:
             return state;
     }

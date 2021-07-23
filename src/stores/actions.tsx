@@ -3,7 +3,7 @@
  * @Author: wangdelei
  * @Date: 2021-07-20 09:52:28
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-22 20:47:26
+ * @LastEditTime: 2021-07-23 13:58:38
  */
 // import types from './actionTypes';
 /*
@@ -23,14 +23,15 @@ export function minusCount(count: number) {
     return { type: MINUS_COUNT, count };
 }
 
-export function dataList(list: any) {
+export function dataList(list: any= []) {
+    console.log('action')
     return { type: DATA_LIST, list };
 }
 
-export function getDataList() {
-    return function (dispatch:any) {
-        getlist().then((res:any) => {
-            dispatch(dataList(res.result));
-        });
-    }
-}
+// export function getDataList() {
+//     return function (dispatch:any) {
+//         getlist().then((res:any) => {
+//             dispatch(dataList(res.result));
+//         });
+//     }
+// }
