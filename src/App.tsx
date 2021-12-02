@@ -3,11 +3,11 @@
  * @Author: wangdelei
  * @Date: 2021-07-07 13:59:31
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-07-14 15:05:30
+ * @LastEditTime: 2021-12-02 10:17:49
  */
 import routes from './routes';
 // Link
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from '@/utils/react-router-dom';
 function App() {
     return (
         <BrowserRouter>
