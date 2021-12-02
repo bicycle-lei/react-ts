@@ -79,8 +79,8 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 var BrowserRouter =
     /*#__PURE__*/
     (function (_React$Component) {
+        console.log(typeof _React$Component)
         _inheritsLoose(BrowserRouter, _React$Component); // BrowserRouter 继承 React.Component
-       
         function BrowserRouter() {
             var _this;
             for (
