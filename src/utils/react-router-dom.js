@@ -3,12 +3,12 @@
  * react-router-dom 源码浅观
  * react-router-dom 包含了 react-router 的所有能力。
  * react-router-dom 本身只提供了和 dom 相关的四个组件，BrowserRouter、HashRouter、Link 和 NavLink。
- * 
-*/
+ *
+ */
 
 /**
  * 工具函数 返回入参默认属性值或入参
-*/
+ */
 function _interopDefault(ex) {
     return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex;
 }
@@ -18,12 +18,12 @@ var React = _interopDefault(require('react')); // react 库
 var history = require('history'); // history 库
 var PropTypes = _interopDefault(require('prop-types')); // 属性类型检测 库
 var warning = _interopDefault(require('tiny-warning')); // 警告函数
-var invariant = _interopDefault(require('tiny-invariant'));// 抛出异常
+var invariant = _interopDefault(require('tiny-invariant')); // 抛出异常
 
 /**
  * 工具函数 拷贝入参对象到目标对象
- * 
-*/
+ *
+ */
 function _extends() {
     _extends =
         Object.assign ||
@@ -46,7 +46,7 @@ function _extends() {
 
 /**
  * 工具函数 原型链继承
-*/
+ */
 function _inheritsLoose(subClass, superClass) {
     subClass.prototype = Object.create(superClass.prototype);
     subClass.prototype.constructor = subClass;
@@ -55,7 +55,7 @@ function _inheritsLoose(subClass, superClass) {
 
 /**
  * 工具函数 过滤对象属性
-*/
+ */
 function _objectWithoutPropertiesLoose(source, excluded) {
     if (source == null) return {};
     var target = {};
@@ -73,16 +73,16 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 
 /**
  * The public API for a <Router> that uses HTML5 history.
+ * BrowserRouter 包装了<Router>
  */
 
 var BrowserRouter =
     /*#__PURE__*/
     (function (_React$Component) {
-        _inheritsLoose(BrowserRouter, _React$Component);
-
+        _inheritsLoose(BrowserRouter, _React$Component); // BrowserRouter 继承 React.Component
+       
         function BrowserRouter() {
             var _this;
-
             for (
                 var _len = arguments.length, args = new Array(_len), _key = 0;
                 _key < _len;
@@ -90,25 +90,23 @@ var BrowserRouter =
             ) {
                 args[_key] = arguments[_key];
             }
-
             _this =
                 _React$Component.call.apply(
                     _React$Component,
                     [this].concat(args)
                 ) || this;
+            // createBrowserHistory 方法生成了 BrowserHistory 对象，作为传参传给了 Router 组件。
             _this.history = history.createBrowserHistory(_this.props);
             return _this;
         }
 
         var _proto = BrowserRouter.prototype;
-
         _proto.render = function render() {
             return React.createElement(reactRouter.Router, {
                 history: this.history,
                 children: this.props.children,
             });
         };
-
         return BrowserRouter;
     })(React.Component);
 
@@ -189,14 +187,14 @@ var HashRouter =
 }
 /**
  * 工具函数 区分to入参类型
-*/
+ */
 var resolveToLocation = function resolveToLocation(to, currentLocation) {
     return typeof to === 'function' ? to(currentLocation) : to;
 };
 
 /**
  * 工具函数 区分to入参类型
-*/
+ */
 var normalizeToLocation = function normalizeToLocation(to, currentLocation) {
     return typeof to === 'string'
         ? history.createLocation(to, null, null, currentLocation)
@@ -204,8 +202,8 @@ var normalizeToLocation = function normalizeToLocation(to, currentLocation) {
 };
 
 /**
- * 未知
-*/
+ * 兼容 react15
+ */
 var forwardRefShim = function forwardRefShim(C) {
     return C;
 };
@@ -213,19 +211,20 @@ var forwardRefShim = function forwardRefShim(C) {
 var forwardRef = React.forwardRef; // 创建一个react组件
 
 if (typeof forwardRef === 'undefined') {
-    forwardRef = forwardRefShim;
+    forwardRef = forwardRefShim; // forwardRef react 16 新增API
 }
 
 /**
  * 未知
-*/
+ */
 function isModifiedEvent(event) {
     return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 }
 
 /**
- * 创建一个a标签
-*/
+ * 创建一个有click事件的a标签
+ * React.forwardRef((props, ref) => ())
+ */
 var LinkAnchor = forwardRef(function (_ref, forwardedRef) {
     var innerRef = _ref.innerRef,
         navigate = _ref.navigate,
@@ -236,7 +235,7 @@ var LinkAnchor = forwardRef(function (_ref, forwardedRef) {
             'onClick',
         ]);
 
-    var target = rest.target;
+    var target = rest.target; // targen 属性生效
 
     var props = _extends({}, rest, {
         onClick: function onClick(event) {
@@ -248,13 +247,13 @@ var LinkAnchor = forwardRef(function (_ref, forwardedRef) {
             }
 
             if (
-                !event.defaultPrevented && // onClick prevented default
-                event.button === 0 && // ignore everything but left clicks
-                (!target || target === '_self') && // let browser handle "target=_blank" etc.
-                !isModifiedEvent(event) // ignore clicks with modifier keys
+                !event.defaultPrevented && // onClick prevented default onClick 事件中没有调用 preventedDefault
+                event.button === 0 && // ignore everything but left clicks 点击的是左键
+                (!target || target === '_self') && // let browser handle "target=_blank" etc. 没有 target 属性，或者是 target === "_self"
+                !isModifiedEvent(event) // ignore clicks with modifier keys 点击的同时没有按下 alt shilf
             ) {
-                event.preventDefault();
-                navigate();
+                event.preventDefault(); // 取消a标签默认动作 关闭href属性
+                navigate(); //调用navigate 方法，这里是默认的跳转方法
             }
         },
     }); // React 15 compat
@@ -265,7 +264,7 @@ var LinkAnchor = forwardRef(function (_ref, forwardedRef) {
         props.ref = innerRef;
     }
     /* eslint-disable-next-line jsx-a11y/anchor-has-content */
-
+    // Link 组件 增加了 click 事件的 a 标签
     return React.createElement('a', props);
 });
 
@@ -274,7 +273,8 @@ var LinkAnchor = forwardRef(function (_ref, forwardedRef) {
 }
 
 /**
- * 创建Link组件
+ * 包装LinkAnchor生成Link组件
+ * ref = _temp === void 0 ? {} : _temp 即判断_temp是否为undefined, 是就回退为空对象。
  */
 
 var Link = forwardRef(function (_ref2, forwardedRef) {
@@ -291,7 +291,7 @@ var Link = forwardRef(function (_ref2, forwardedRef) {
         ]);
 
     return React.createElement(
-        reactRouter.__RouterContext.Consumer,
+        reactRouter.__RouterContext.Consumer, //reactRouter 提供的context
         null,
         function (context) {
             !context
@@ -300,16 +300,17 @@ var Link = forwardRef(function (_ref2, forwardedRef) {
                       'You should not use <Link> outside a <Router>'
                   )
                 : void 0;
-            var history = context.history;
+            var history = context.history;// content中获得history对象
             var location = normalizeToLocation(
                 resolveToLocation(to, context.location),
                 context.location
-            );
-            var href = location ? history.createHref(location) : '';
+            );// 规范 location
+            var href = location ? history.createHref(location) : ''; //根据location生成href
 
             var props = _extends({}, rest, {
                 href: href,
                 navigate: function navigate() {
+                    // navigate 中调用 histoy 接口的 replace 或者是 push 进行跳转
                     var location = resolveToLocation(to, context.location);
                     var method = replace ? history.replace : history.push;
                     method(location);
@@ -361,7 +362,7 @@ if (typeof forwardRef$1 === 'undefined') {
 }
 /**
  * 工具函数 多个类名拼接成类名字符串
-*/
+ */
 function joinClassnames() {
     for (
         var _len = arguments.length, classnames = new Array(_len), _key = 0;
@@ -379,6 +380,7 @@ function joinClassnames() {
 }
 /**
  * A <Link> wrapper that knows if it's "active" or not.
+ * NavLink 就是 Link 的加强版，在 Link 的基础上封装了一些属性
  */
 
 var NavLink = forwardRef$1(function (_ref, forwardedRef) {
@@ -441,7 +443,7 @@ var NavLink = forwardRef$1(function (_ref, forwardedRef) {
                 : null;
             var isActive = !!(isActiveProp
                 ? isActiveProp(match, currentLocation)
-                : match);
+                : match);// 链接是否处在活跃状态
             var className = isActive
                 ? joinClassnames(classNameProp, activeClassName)
                 : classNameProp;
@@ -494,10 +496,10 @@ var NavLink = forwardRef$1(function (_ref, forwardedRef) {
     });
 }
 /**
- * exports 对象 定义新的属性 
+ * exports 对象 定义新的属性
  * react-router-dom 完全继承 react-router 的能力
- * 
-*/
+ *
+ */
 Object.defineProperty(exports, 'MemoryRouter', {
     enumerable: true,
     get: function () {
@@ -584,7 +586,7 @@ Object.defineProperty(exports, 'withRouter', {
 });
 /**
  * react-router-dom 新增四个API
-*/
+ */
 exports.BrowserRouter = BrowserRouter;
 exports.HashRouter = HashRouter;
 exports.Link = Link;

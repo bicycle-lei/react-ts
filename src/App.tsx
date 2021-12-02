@@ -3,14 +3,14 @@
  * @Author: wangdelei
  * @Date: 2021-07-07 13:59:31
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-12-02 10:17:49
+ * @LastEditTime: 2021-12-02 14:32:12
  */
 import routes from './routes';
 // Link
 import { BrowserRouter, Switch, Route } from '@/utils/react-router-dom';
 function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter a='1'>
             <Switch>
                 {routes.map((item) => {
                     const { path, childRoutes } = item;
