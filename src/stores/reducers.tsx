@@ -15,6 +15,7 @@ import { ADD_COUNT, MINUS_COUNT, DATA_LIST } from './actionTypes';
  * @return {*} 返回新的 count
  */
 function count(state = 0, action: any) {
+    console.log(2);
     const newCount = action.count || 0;
     switch (action.type) {
         case ADD_COUNT:
@@ -33,6 +34,7 @@ function count(state = 0, action: any) {
  */
 function list(state = [], action: any) {
     // const newList = action.list || [];
+    console.log(1);
     switch (action.type) {
         case DATA_LIST:
             return [...state, ...action.list];

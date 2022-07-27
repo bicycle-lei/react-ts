@@ -24,7 +24,6 @@ export function minusCount(count: number) {
 }
 
 export function dataList(list: any= []) {
-    console.log('action')
     return { type: DATA_LIST, list };
 }
 

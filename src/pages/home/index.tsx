@@ -22,7 +22,6 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = (props) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    console.log(props.state.list)
     const toAbout =  () => {
         props.history.push('/about')
     }
